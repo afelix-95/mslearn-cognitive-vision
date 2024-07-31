@@ -25,7 +25,7 @@ Before using Vision Studio to try out the capabilities of Image Analysis 4.0, yo
 
     Select **Review + Create**, then select **Create**. 
 
-3. Return to the Azure portal Marketplace. Search for and select **Cognitive Services**, then select **Create**. 
+3. Return to the Azure portal Marketplace. Search for and select **Azure AI Services**, then select **Create**. 
 
     Configure the resource with the following settings:
     - **Subscription**: *Your Azure subscription*
@@ -52,7 +52,7 @@ Configure the resource with the following settings:
     - **Performance**: Standard
     - **Redundancy**: *check the box 'make read access to data available'*
 
-    Select **Review** and **Create**.  
+    Select **Review + Create**, then select **Create**.  
 
     ![Screenshot of the configuration screen to create a Storage Account.](../media/05-storage-account-creation.png)
 
@@ -62,29 +62,11 @@ Configure the resource with the following settings:
 
     ![Screenshot of the Data Storage menu header with a red box around the Containers link.](../media/05-container-navigation.png)
 
-6. Create a new container by selecting **+ Container**. 
-    
-    ![Screenshot of the create a container button on the Containers page.](../media/05-new-container.png)
-    
-    Configure the container with these settings:
-    - **Name**: photo-album
-    - **Public access level**: Container (anonymous read access for containers and blobs)
+6. Create a new container by selecting **+ Container**. Name it **photo-album** and then select **Create**.
 
-    Select **Create**.
+7. Create a second container for hosting the training images you will use in the next exercise. Name it **training-images**.
 
-7. Create a second container for hosting the training images you will use in the next exercise. Select **+ Container**. 
-Configure the container with these settings:
-    - **Name**: training-images
-    - **Public access level**: Container (anonymous read access for containers and blobs)
-    
-    Select **Create**.
-
-8. Repeat the above steps to create a third container for hosting the images you will use in the next exercise to evaluate your custom model. Select **+ Container**. 
-Configure the container with these settings:
-    - **Name**: evaluation-images
-    - **Public access level**: Container (anonymous read access for containers and blobs)
-
-    Select **Create**.
+8. Repeat the above steps to create a third container named **evaluation-images** for hosting the images you will use in the next exercise to evaluate your custom model.
 
 ## Configure a CORS rule on the storage account
 
@@ -206,7 +188,7 @@ You are ready to use [Vision Studio](https://portal.vision.cognitive.azure.com/)
 
     The JSON output includes the text of the generated caption, a confidence score, and metadata about the file and version of the model used to perform the image analysis.
 
-8. Next, use the same image to perform **Dense captioning**. Return to the **Vision Studio** home page, and as you did before, select the **Image analysis** tab, then select the **Dense captioning** tile.
+8. Next, use the same image to perform **Dense captioning**. Return to the **Vision Studio** home page, and as you did before, select the **Image analysis** tab, then select the **Add dense captions to images** tile.
 
     ![The Dense captioning tile is displayed.](../media/05-vision-studio-image-analysis-dense-captioning.png)
 
@@ -267,7 +249,7 @@ The next feature you will try is the **Extract Tags** functionality of Image Ana
 
     ![The Extract common tags from images tile is displayed.](../media/05-vision-studio-image-analysis-extract-common-tags.png)
 
-2. In the **Choose the model you want to try out**, leave **Pretrained Vision model** selected. In the **Choose your language**, select **English** or a language of your preference.
+2. In the **Choose the model you want to try out**, leave **Prebuilt product vs. gap model** selected. In the **Choose your language**, select **English** or a language of your preference.
 
 3. Open the folder containing the images you downloaded and unzipped and locate the file named `shopping.jpg` within the `try-it-out` folder.
 
@@ -291,7 +273,7 @@ In this task, you use the **Object detection** feature of Image Analysis. Object
 
     ![The Detect common objects in images tile is displayed.](../media/05-vision-studio-image-analysis-detect-common-objects.png)
 
-2. In the **Choose the model you want to try out**, leave **Pretrained Vision model** selected.
+2. In the **Choose the model you want to try out**, leave **Prebuilt product vs. gap model** selected.
 
 3. Open the folder containing the images you downloaded and unzipped and locate the file named `road-scene.jpg` within the `try-it-out` folder.
 
@@ -327,22 +309,13 @@ In this task, you use the Read API's **Extract text** capabilities to extract pr
 
 5. Return to your downloaded images folder and drag the `note.jpg` file into the **Drag and drop a file here** box, or select **Browse for a file** and retrieve the `note.jpg` file from the location you saved it to your local computer.
 
-    Observe the results. This image contains handwritten text, demonstrating that the OCR engine can extract printed or handwritten text. If you select the **JSON** tab, you will see the `style` property under `appearance` has the name of `handwriting`, indicating the API detected the text as handwritten.
-
-    ```json
-    "appearance": {
-        "style": {
-            "name": "handwriting",
-            "confidence": 1
-        }
-    }
-    ```
+    Observe the results. This image contains handwritten text, demonstrating that the OCR engine can extract printed or handwritten text.
 
 ## Image retrieval
 
 In this task, you use the **Image retrieval** functionality of Azure Computer Vision. Image retrieval in Image Analysis 4.0 uses vectorization to match your search text more efficiently with images in a photo album in Azure Blob storage. Image retrieval enables you to search pictures for content using natural language queries.
 
-1. Return to the home page of Vision Studio, then select the **Search photos with natural language** tile under the **Image analysis** tab.
+1. Return to the home page of Vision Studio, then select the **Search photos with image retrieval** tile under the **Image analysis** tab.
 
     ![The Search photos with natural language tile is displayed.](../media/05-vision-studio-image-analysis-search-photos.png)
 
@@ -374,88 +347,22 @@ In this task, you use the **Image retrieval** functionality of Azure Computer Vi
 
 ## Background removal
 
-The **Background removal** feature of Image Analysis 4.0 is useful when extracting information and content from images with distracting or noisy backgrounds. You need to focus your analysis on the most critical visual features. Background removal is unavailable as a try-it-out experience in Vision Studio, so you will access it via the [Segment](https://centraluseuap.dev.cognitive.microsoft.com/docs/services/unified-vision-apis-public-preview-2023-02-01-preview/operations/63e6b6d9217d201194bbecbd) API endpoint.
+The **Background removal** feature of Image Analysis 4.0 is useful when extracting information and content from images with distracting or noisy backgrounds. You need to focus your analysis on the most critical visual features. 
 
-For this task, you will use the `REST Client` extension of Visual Studio Code to make calls to the endpoint.
+1. Return to the home page of Vision Studio, then select the **Remove backgrounds from images** tile under the **Image analysis** tab.
 
-1. [Download Visual Studio Code](https://code.visualstudio.com/download) if you don't already have it installed, and then start Visual Studio Code.
+    ![The Remove backgrounds from images tile is displayed.](../media/05-vision-studio-image-analysis-remove-background.png)
 
-2. In Visual Studio Code, select the Extensions icon in the left-hand toolbar, enter "REST Client" into the **Search Extensions in Marketplace** box, and then select **Install** for the **REST Client** extension.
+2. Open the folder containing the images you downloaded and unzipped and locate the file named `store.jpg` within the `try-it-out` folder.
 
-    ![The Visual Studio Code extensions tab is displayed, with REST Client highlighted in the search bar and the REST Client extension highlighted in the search results. The Install button for the extension is highlighted.](../media/05-vs-code-extensions-rest-client.png)
+3. Drag the `store.jpg` file into the **Drag and drop a file here** box, or select **Browse for a file** and retrieve the `store.jpg` file from the location you saved it to your local computer.
 
-3. Download the `image-analysis.http` file from here: <https://github.com/MicrosoftLearning/mslearn-cognitive-vision/raw/main/assets/image-analysis.http>
+    ![The box for dragging and dropping files is displayed.](../media/05-vision-studio-try-it-out-drag-and-drop-file.png)
 
-    **Note**: If the file opens in the browser window, copy its raw text and paste it into a new file in Visual Studio Code named `image-analysis.http`. Alternatively, you can right-click on the page in the browser, select **Save As**, and then download the file that way. This method may require manually renaming the file to remove the `.txt` extension.
-
-4. Open the `image-analysis.http` file using Visual Studio Code.
-
-5. Before you can run the first command, you need to retrieve the subscription key for your Cognitive Services account from the Azure portal. In a browser window, open the [Azure portal](https://portal.azure.com/), and navigate to the `cog-ms-learn-vision-SUFFIX` Cognitive Service resource you created above.
-
-6. On the Cognitive Services page, select **Keys and Endpoint** under **Resource Management** from the left-hand navigation menu. Copy the **KEY 1** value by selecting the **Copy to clipboard** icon to the right of the key value.
-
-    ![The Cognitive Services page is displayed in the Azure portal. In the left-hand navigation menu, Keys and Endpoint is highlighted and selected. The copy to clipboard button is highlighted next to the KEY 1 value.](../media/05-azure-portal-cognitive-services-keys-and-endpoint.png)
-
-7. Return to the `image-analysis.http` file in Visual Studio code and replace `[INSERT YOUR COGNITIVE SERVICES SUBSCRIPTION KEY]` with the KEY 1 value you copied.
-
-    ![[INSERT YOUR COGNITIVE SERVICES SUBSCRIPTION KEY] is highlighted after the @subscriptionKey variable.](../media/05-vs-code-image-analysis-subscription-key.png)
-
-    With the key updated, you are now ready to send requests to the **Segment** API to perform the background removal steps.
-
-    To see the impact of background removal, you will use the image below:
-
-    ![Image of a woman and girl taking a photo with a phone in a grocery store.](../media/05-store.jpg)
-
-8. Before removing the image background, you will call the Image Analysis **Analyze** API to generate a caption for the original image. In the `image-analysis.http` file, select **Send Request** below the `### Generate a caption for the original image` header.
-
-    ![The Send Request link is highlighted in the image-analysis.http file under the Generate a caption for the original image header.](../media/05-vs-code-image-analysis-analyze-caption-original-image.png)
-
-    Note the caption returned in the **Response** tab that opens:
-
-    ```json
-    {
-      "captionResult": {
-        "text": "a woman and a girl in a grocery store",
-        "confidence": 0.4891723394393921
-      },
-      "modelVersion": "2023-02-01-preview",
-      "metadata": {
-        "width": 1024,
-        "height": 682
-      }
-    }
-    ```
-
-    The caption should be similar to "a woman and a girl in a grocery store." While this caption is accurate, it does not necessarily give us any context into what the people in the photo are doing. The image captioning process evaluates all of the available information in the image to create the caption, resulting in some crucial details potentially being left out of the caption.
-
-9. Return to the `image-analysis.http` file and select **Send Request** below the `### Background removal` header to submit an HTTP request to the **Segment** API to perform background removal on the image specified in the `url` parameter in the body of the request.
-
-    ![The Send Request link is highlighted in the image-analysis.http file under the Background removal header.](../media/05-vs-code-image-analysis-background-removal.png)
-
-10. After a few seconds, the response from the API will be returned in a new tab in Visual Studio Code. The response should look similar to the following:
+4. Observe the results. The response should look similar to the following:
 
     ![The image above with the woman and girl taking a photo in a grocery store is displayed with the background removed.](../media/05-store-background-removal.png)
 
-11. Now, you will generate a caption for the image with the background removed. In the `image-analysis.http` file, select **Send Request** below the `### Generate a caption for the image with the background removed` header.
-
-    ![The Send Request link is highlighted in the image-analysis.http file under the Generate a caption for the image with the background removed header.](../media/05-vs-code-image-analysis-analyze-caption-background-removed-image.png)
-
-    Note the caption returned in the **Response** tab that opens and compare it to the caption that was generated for the original image:
-
-    ```json
-    {
-      "captionResult": {
-        "text": "a woman and a girl taking a picture",
-        "confidence": 0.39474931359291077
-      },
-      "modelVersion": "2023-02-01-preview",
-      "metadata": {
-        "width": 1024,
-        "height": 682
-      }
-    }
-    ```
-
-    The caption should be, "a woman and a girl taking a picture." Using the **Background removal** feature of Image Analysis 4.0, you can reduce the information in the photo down to the main subjects, eliminating any background noise from the picture. By removing the background, Image Analysis can identify different details as the focus, providing better context into what the photo's subjects are doing.
+Using the **Background removal** feature of Image Analysis 4.0, you can reduce the information in the photo down to the main subjects, eliminating any background noise from the picture. By removing the background, Image Analysis can identify different details as the focus, providing better context into what the photo's subjects are doing.
 
 Congratulations! You have successfully used Vision Studio to try out the new features of Image Analysis 4.0.
